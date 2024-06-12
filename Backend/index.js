@@ -18,8 +18,7 @@ const AuthRoutes = require("./src/controllers/auth.controller")
 app.use(express.json())
 app.use(cors({
     origin: fetch("https://webkelas-4vko.vercel.app"),
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token']
+    methods: "POST, GET"
 }))
 
 
