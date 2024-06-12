@@ -22,7 +22,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const url = "https://webkelas-ddjdj.vercel.app/api/users";
-      const { data: res } = await axios.post(url, data);
+      const { data: res } = await fetch(url, data);
       navigate("/login");
 
       // console.log(res.message);
