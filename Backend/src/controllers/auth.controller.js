@@ -5,7 +5,7 @@ const router = express.Router()
 
 const { User } = require("../models/user.model")
 
-const  Joi  = require("joi")
+const  {Joi}  = require("joi")
 
 const bcrypt = require("bcrypt")
 
