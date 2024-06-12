@@ -15,7 +15,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "https://webkelas-api.vercel/api/auth";
+      const url = "https://webkelas-api.vercel.app/api/auth";
       const { data: res } = await axios.post(url, data);
       // console.log("Res", res);
       localStorage.setItem("token", res.data);
@@ -23,7 +23,7 @@ const Login = () => {
       // toast.success(res.Message, {
       //   position: toast.POSITION.TOP_RIGHT,
       // });
-      window.location = "/home";
+      window.location = "/";
     } catch (error) {
       console.log("Error", error);
       if (
