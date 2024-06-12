@@ -17,7 +17,7 @@ const AuthRoutes = require("./src/controllers/auth.controller")
 //middlewares 
 app.use(express.json())
 app.use(cors({
-    origin: fetch('https://webkelas-front.vercel.app')
+    origin: fetch("https://webkelas-front.vercel.app")
 }))
 
 
