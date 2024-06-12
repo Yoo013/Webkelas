@@ -1,47 +1,65 @@
-const express = require("express");
-const router = express.Router();
-const { User } = require("../models/user.model");
-const Joi = require("joi");
-const bcrypt = require("bcrypt");
 
-router.post("/", async (req, res) => {
+const express = require("express")
+
+const router = express.Router()
+
+const { User } = require("../models/user.model")
+
+const  Joi  = require("joi")
+
+const bcrypt = require("bcrypt")
+
+
+router.post("/", async (req, resp) => {
     try {
-        // Validate the request body using Joi schema
-        const { error } = validateSchema(req.body);
+        //cheching the schema error
+        // destructuring the "error" property from the result of validateSchema. The Joi validation "error" object contains details about the validation "error", and it's conventionally named error
+        // const { err } = validateSchema(req.body)      // it should not be err 
+
+        const { error } = validateSchema(req.body)
         if (error) {
-            return res.status(400).send({ message: error.details[0].message });
+            return resp.status(400).send({ Message: error.details[0].message })
         }
 
-        // Find the user by email
-        const user = await User.findOne({ email: req.body.email });
+        //finding  the user email from the body in the User model or User table or User Collection
+        const user = await User.findOne({ email: req.body.email })
+        // console.log("users", user)
+
+        //if user not found then error
         if (!user) {
-            return res.status(401).send({ message: "Invalid Email or Password" });
+            return resp.status(401).send({ Message: "Invalid Email or Password" })
         }
 
-        // Compare the provided password with the hashed password in the database
-        const validPassword = await bcrypt.compare(req.body.password, user.password);
-        if (!validPassword) {
-            return res.status(401).send({ message: "Invalid Email or Password!" });
+        // Checking the password......   comparing with bcrypt or hashing password
+        const ValidPassword = await bcrypt.compare(req.body.password, user.password)
+
+        if (!ValidPassword) {
+            return resp.status(401).send({ Message: "Invalid Email or Password!" })
         }
 
-        // Generate authentication token if email and password are valid
-        const token = user.generateAuthToken();
-        return res.status(200).send({ data: token, message: "Logged in Successfully" });
+        //if email & password match currectly then return the token  & send message logged in successfull
 
-    } catch (err) {
-        // Log the error for debugging and send a generic error message to the client
-        console.error(err);  // Add logging mechanism
-        return res.status(500).send({ message: "Internal Server Error" });
+        const token = user.generateAuthToken()
+        resp.status(200).send({ data: token, Message: "Logged in Successfully" })
+
     }
-});
+    catch (err) {
+        // resp.status(500).send({ Message: "Internal Server Error !" })
+        resp.status(500).send({ Message: err.message })
+    }
+})
 
-// Validate function to validate request body using Joi
+
+//validate function which will validate our req.body or email.......
+
 const validateSchema = (data) => {
+    //schema is a Joi object which will validate email and password
     const schema = Joi.object({
         email: Joi.string().email().required().label("Email"),
         password: Joi.string().required().label("Password")
-    });
-    return schema.validate(data);
+    })
+    return schema.validate(data)
 }
 
-module.exports = router;
+
+module.exports = router

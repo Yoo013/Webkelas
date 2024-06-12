@@ -17,13 +17,14 @@ const Login = () => {
     try {
       const url = "https://webkelas-api.vercel.app/api/auth";
       const { data: res } = await axios.post(url, data);
+      navigate("/home");
       // console.log("Res", res);
       localStorage.setItem("token", res.data);
       alert(res.Message);
       // toast.success(res.Message, {
       //   position: toast.POSITION.TOP_RIGHT,
       // });
-      window.location = "/";
+      window.location = "/home";
     } catch (error) {
       console.log("Error", error);
       if (
