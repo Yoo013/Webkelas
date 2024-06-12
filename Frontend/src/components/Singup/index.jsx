@@ -21,7 +21,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "https://webkelas-ddjdj.vercel.app/api/users";
+      const url = "https://webkelas-three.vercel.app/api/users";
       const { data: res } = await axios.post(url, data);
       navigate("/login");
 
