@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Routes>
-        {user && <Route path="/" element={<App2/>} />}
+        {user && <Route path="/home" element={<App2/>} />}
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<App3/>} />
