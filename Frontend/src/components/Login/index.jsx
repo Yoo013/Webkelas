@@ -15,8 +15,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http:localhost:3000/api/auth";
+      const url = "https://webkelas-server.vercel.app/api/auth";
       const { data: res } = await axios.post(url, data);  
+      navigate("/home");
       // console.log("Res", res);
       localStorage.setItem("token", res.data);
       alert(res.Message);
