@@ -17,7 +17,8 @@ const AuthRoutes = require("./src/controllers/auth.controller")
 //middlewares 
 app.use(express.json())
 app.use(cors({
-    origin: "http://localhost:5173"
+    origin: "https://webkelas-mauve.vercel.app",
+
 }))
 
 
