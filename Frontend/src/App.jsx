@@ -4,7 +4,7 @@ import Signup from "./components/Singup";
 import Login from "./components/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import App3 from "./App3";
+
 import App2 from "./App2";
 
 function App() {
@@ -13,11 +13,10 @@ function App() {
   return (
     <>
       <Routes>
-        {user && <Route path="/home" element={<App2/>} />}
+      {user && <Route path="/" element={<App2/>} />}
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<App3/>} />
-       
+        <Route path="/" element={<Navigate replace to="/login" />} />
       </Routes>
       <ToastContainer />
     </>
