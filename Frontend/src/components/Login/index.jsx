@@ -24,7 +24,7 @@ const Login = () => {
       // toast.success(res.Message, {
       //   position: toast.POSITION.TOP_RIGHT,
       // });
-      window.location = "/home";
+    
     } catch (error) {
       console.log("Error", error);
       if (
